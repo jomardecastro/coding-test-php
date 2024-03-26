@@ -38,19 +38,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <div class="top-nav-title">
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
-        <div class="top-nav-links">
-            <?php if ($this->getRequest()->getSession()->read('Auth.User')): ?>
-                <div>
-                    <p>Welcome <?= h($this->getRequest()->getSession()->read('Auth.User.email')); ?></p>
-                    <?= $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout']) ?>
-                </div>
-            <?php else: ?>
-                <div>
-                    <?= $this->Html->link('Login', ['controller' => 'Users', 'action' => 'login']) ?>
-                    <?= $this->Html->link('Create Account', ['controller' => 'Users', 'action' => 'add'],['class' => 'message']) ?>
-                </div>
-            <?php endif; ?>
-        </div>
+        
     </nav>
     <main class="main">
         <div class="container">
