@@ -74,7 +74,15 @@ class LikesTable extends Table
         $validator
             ->integer('article_id')
             ->notEmptyString('article_id');
-
+            
+        $validator
+            ->requirePresence('user_id', 'create')
+            ->notEmptyString('user_id')
+            ->add('user_id', 'uniqueCombination', [
+                'rule' => ['validateUnique', ['scope' => ['article_id']]],
+                'provider' => 'table',
+                'message' => 'You have already liked this article.'
+            ]);
         return $validator;
     }
 

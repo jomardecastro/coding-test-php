@@ -50,7 +50,7 @@ return function (RouteBuilder $routes): void {
     $routes->setRouteClass(DashedRoute::class);
 
     $routes->setExtensions(['json', 'xml']);
-
+    
     $routes->scope('/', function (RouteBuilder $builder): void {
         /*
          * Here, we are connecting '/' (base path) to a controller called 'Pages',
@@ -66,6 +66,11 @@ return function (RouteBuilder $routes): void {
 
         $builder->resources('Articles');
         $builder->resources('Users');
+
+        $builder->connect('/articles/:id', ['controller' => 'Articles', 'action' => 'view'])
+        ->setPass(['id'])
+        ->setExtensions(['json']);
+        
         /*
          * Connect catchall routes for all controllers.
          *
@@ -82,6 +87,7 @@ return function (RouteBuilder $routes): void {
         $builder->fallbacks();
     });
 
+    
     /*
      * If you need a different set of middleware or none at all,
      * open new scope and define routes there.

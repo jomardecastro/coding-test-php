@@ -52,22 +52,49 @@ class LikesController extends AppController
      */
     public function add()
     {
-        $response = ['success' => false, 'message' => 'The like could not be saved. Please, try again.'];
-
-        $insert['user_id'] = $this->Auth->user('id');
-        $insert['article_id'] = $this->request->getData('article_id');
-        $like = $this->Likes->newEmptyEntity();
-        if ($this->request->is('post')) 
+        if($this->Auth->user() != null) 
         {
-            $like = $this->Likes->patchEntity($like, $insert);
-            if ($this->Likes->save($like)) {
-                $this->Flash->success(__('The like has been saved.'));
-                $response = ['success' => true, 'message' => 'The like has been saved.'];
+            $response = ['success' => false, 'message' => 'The like could not be saved. Please, try again.'];
+            $insert['user_id'] = $this->Auth->user('id');
+            $insert['article_id'] = $this->request->getData('article_id');
+            $like = $this->Likes->newEmptyEntity();
+            if ($this->request->is('post')) 
+            {
+                $like = $this->Likes->patchEntity($like, $insert);
+                if ($this->Likes->save($like)) 
+                {
+                    $response = ['success' => true, 'message' => 'The like has been saved.'];
+                }
+                else 
+                {
+                    $errors = $like->getErrors();
+                    $errorMessages = [];
+                    foreach($errors as $field => $error){
+                        $errorMessages[] = $field .': '. array_pop($error);
+                    }
+                    $response['message'] .= ' Validation errors: ' . implode(' ', $errorMessages);
+                }
             }
-            $this->Flash->error(__('The like could not be saved. Please, try again.'));
+            else 
+            {
+                $response = [
+                    'success' => false,
+                    'message' => 'Invalid request method.',
+                ];
+                $statusCode = 405;
+            }
+        }
+        else 
+        {
+            $response = [
+                'success' => false,
+                'message' => 'Please log in first.',
+            ];
+            $statusCode = 401; 
         }
         $this->set(compact('response'));
-        $this->viewBuilder()->setOption('serialize', 'response');
+        $this->set('_serialize', 'response');
+        $this->response = $this->response->withStatus($statusCode);
     }
 
     /**

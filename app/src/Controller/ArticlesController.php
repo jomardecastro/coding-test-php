@@ -27,8 +27,9 @@ class ArticlesController extends AppController
     public function index()
     {
         $articles = $this->paginate($this->Articles);
-        $this->viewBuilder()->setOption('serialize', ['articles']);
-        $this->set(compact('articles'));
+        $user = $this->Auth->user();
+        $this->viewBuilder()->setOption('serialize', ['articles', 'user']);
+        $this->set(compact('articles', 'user'));
     }
 
     /**
@@ -43,7 +44,7 @@ class ArticlesController extends AppController
         $article = $this->Articles->get($id, [
             'contain' => [],
         ]);
-
+        $this->viewBuilder()->setOption('serialize', ['article']);
         $this->set(compact('article'));
     }
 
