@@ -49,13 +49,33 @@ Directly going to routes that need authentication without logging in will redire
 
 You can use Postman for Article Management
 
-- Retrieve All Articles **(GET)** /articles.json *all users*
-- Retrieve a Single Article **(GET)** /articles/{id}.json *all users*
-- Create an Article **(POST)** /articles.json *only logged in users*
-- Update an Article **(PUT)** /articles/{id}.json *only logged in article writer users*
-- Delete an Article **(DELETE)** /articles/{id}.json *only logged in article writer users*
+Retrieve All Articles (GET)
 
-You can also visit /articles for this
+- Endpoint: `/articles.json`
+- Allowed Users: All users
+
+Retrieve a Single Article (GET)
+
+- Endpoint: `/articles/{id}.json`
+- Allowed Users: All users
+
+Create an Article (POST)
+
+- Endpoint: `/articles.json`
+- Allowed Users: Only logged-in users
+
+Update an Article (PUT)
+
+- Endpoint: `/articles/{id}.json`
+- Allowed Users: Only logged-in article writer users
+
+Delete an Article (DELETE)
+
+- Endpoint: `/articles/{id}.json`
+- Allowed Users: Only logged-in article writer users
+
+
+You can also visit /articles to do this
 
 ### Like Feature
 
