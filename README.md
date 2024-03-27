@@ -41,12 +41,29 @@ The application should now be accessible at http://localhost:34251
 ### Authentication
 TODO: pls summarize how to check "Authentication" bahavior
 
-going to /users will redirect you to login, but once logged in you can view /users
+There is a button on the layout for login/register
+
+You can register as a user or an article writer
+
+going to /users will redirect you to login, 
+but once logged in you can view /users
+
 ### Article Management
 
-I used Postman for Article Management
-TODO: pls summarize how to check "Article Management" bahavior
+You can use Postman for Article Management
+
+Retrieve All Articles **(GET)** /articles.json *all users*
+Retrieve a Single Article **(GET)** /articles/{id}.json *all users*
+Create an Article **(POST)** /articles.json *only logged in users*
+Update an Article **(PUT)** /articles/{id}.json *only logged in article writer users*
+Delete an Article **(DELETE)** /articles/{id}.json *only logged in article writer users*
+
+You can also visit /articles for this
 
 ### Like Feature
-Action buttons only show up when logged in
-TODO: pls summarize how to check "Like Feature" bahavior
+
+You can visit /articles 
+
+If not logged in: You can view the articles
+If logged in as user: You can view and like the articles
+If logged in as article writer: You can view, edit, delete and like the articles

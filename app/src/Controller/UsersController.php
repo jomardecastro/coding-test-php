@@ -11,28 +11,11 @@ namespace App\Controller;
  */
 class UsersController extends AppController
 {
-    public function initialize() : void
+    public function initialize(): void
     {
         parent::initialize();
-        $this->loadComponent('Auth', [
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password',
-                    ]
-                ]
-            ],
-            'loginAction' => [
-                'controller' => 'Users',
-                'action' => 'login'
-            ]
-        ]);
-        $this->Auth->allow(['display', 'view', 'index', 'add']);
-
+        $this->Auth->allow(['logout', 'add']);
     }
-
-
     /**
      * Index method
      *

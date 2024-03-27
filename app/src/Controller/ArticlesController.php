@@ -10,15 +10,6 @@ namespace App\Controller;
  */
 class ArticlesController extends AppController
 {
-    public function initialize(): void
-    {
-        parent::initialize();
-        $this->loadComponent('RequestHandler');
-        $this->loadComponent('Auth');
-        $this->Auth->allow(['view', 'index']);
-
-    
-    }
     /**
      * Index method
      *
@@ -55,9 +46,6 @@ class ArticlesController extends AppController
      */
     public function add()
     {
-       
-        if($this->Auth->user() != null) 
-        {
             $article = $this->Articles->newEmptyEntity();
             if ($this->request->is('post')) 
             {
@@ -74,7 +62,6 @@ class ArticlesController extends AppController
                         'message' => 'The article has been saved.',
                         'data' => $article,
                     ];
-                    $statusCode = 200;
                 }
                 else
                 {
@@ -83,7 +70,6 @@ class ArticlesController extends AppController
                         'message' => 'The article could not be saved. Please, try again.',
                         'errors' => $article->getErrors(),
                     ];
-                    $statusCode = 400;
                 }
             }
             else 
@@ -92,21 +78,10 @@ class ArticlesController extends AppController
                     'success' => false,
                     'message' => 'Invalid request method.',
                 ];
-                $statusCode = 405;
             }
-        } 
-        else 
-        {
-            $response = [
-                'success' => false,
-                'message' => 'Please log in first.',
-            ];
-            $statusCode = 401; 
-        }
-        
+        $this->set('article', $article);
         $this->set(compact('response'));
         $this->set('_serialize', 'response');
-        $this->response = $this->response->withStatus($statusCode);
     }
 
     /**
@@ -123,14 +98,20 @@ class ArticlesController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $article = $this->Articles->patchEntity($article, $this->request->getData());
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('The article has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+            if ($this->Articles->save($article)) 
+            {
+                $response = [
+                    'success' => true,
+                    'message' => 'The article has been saved.',
+                    'data' => $article,
+                ];
             }
+            
             $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
-        $this->set(compact('article'));
+
+        $this->set(compact('response'));
+        $this->set('_serialize', 'response');
     }
 
     /**
@@ -150,7 +131,8 @@ class ArticlesController extends AppController
             $this->Flash->error(__('The article could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        $this->set(compact('response'));
+        $this->set('_serialize', 'response');
     }
 
 }

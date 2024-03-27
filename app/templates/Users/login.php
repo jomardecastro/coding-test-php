@@ -1,7 +1,3 @@
-<?php
- $this->layout = 'users';
-?>
-
 <div class="users form">
 <?= $this->Flash->render('auth') ?>
 <?= $this->Form->create() ?>

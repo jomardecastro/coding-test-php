@@ -63,13 +63,9 @@ return function (RouteBuilder $routes): void {
          * ...and connect the rest of 'Pages' controller's URLs.
          */
         $builder->connect('/pages/*', 'Pages::display');
-
         $builder->resources('Articles');
         $builder->resources('Users');
-
-        $builder->connect('/articles/:id', ['controller' => 'Articles', 'action' => 'view'])
-        ->setPass(['id'])
-        ->setExtensions(['json']);
+        $builder->resources('Likes');
         
         /*
          * Connect catchall routes for all controllers.
