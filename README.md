@@ -39,8 +39,6 @@ The application should now be accessible at http://localhost:34251
 ## How to check
 
 ### Authentication
-TODO: pls summarize how to check "Authentication" bahavior
-
 There is a button on the layout for login/register
 
 You can register as a user or an article writer
