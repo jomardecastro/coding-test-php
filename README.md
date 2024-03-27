@@ -40,11 +40,8 @@ The application should now be accessible at http://localhost:34251
 
 ### Authentication
 There is a button on the layout for login/register
-
 You can register as a user or an article writer
-
-going to /users will redirect you to login, 
-but once logged in you can view /users
+Directly going to routes that need authentication without logging in will redirect you to login page
 
 ### Article Management
 
