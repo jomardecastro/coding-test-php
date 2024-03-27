@@ -52,11 +52,11 @@ but once logged in you can view /users
 
 You can use Postman for Article Management
 
-Retrieve All Articles **(GET)** /articles.json *all users*
-Retrieve a Single Article **(GET)** /articles/{id}.json *all users*
-Create an Article **(POST)** /articles.json *only logged in users*
-Update an Article **(PUT)** /articles/{id}.json *only logged in article writer users*
-Delete an Article **(DELETE)** /articles/{id}.json *only logged in article writer users*
+- Retrieve All Articles **(GET)** /articles.json *all users*
+- Retrieve a Single Article **(GET)** /articles/{id}.json *all users*
+- Create an Article **(POST)** /articles.json *only logged in users*
+- Update an Article **(PUT)** /articles/{id}.json *only logged in article writer users*
+- Delete an Article **(DELETE)** /articles/{id}.json *only logged in article writer users*
 
 You can also visit /articles for this
 
@@ -64,6 +64,6 @@ You can also visit /articles for this
 
 You can visit /articles 
 
-If not logged in: You can view the articles
-If logged in as user: You can view and like the articles
-If logged in as article writer: You can view, edit, delete and like the articles
+- If not logged in: You can view the articles
+- If logged in as user: You can view and like the articles
+- If logged in as article writer: You can view, edit, delete and like the articles
